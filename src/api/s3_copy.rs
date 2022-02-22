@@ -300,12 +300,7 @@ pub async fn handle_upload_part_copy(
 		current_offset = block_end;
 	}
 
-	if size_to_copy < 1024 * 1024 {
-		return Err(Error::BadRequest(format!(
-			"Not enough data to copy: {} bytes (minimum: 1MB)",
-			size_to_copy
-		)));
-	}
+	trace!("UploadPartCopy will copy {} bytes", size_to_copy);
 
 	// Now, actually copy the blocks
 	let mut md5hasher = Md5::new();
